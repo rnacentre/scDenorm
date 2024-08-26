@@ -23,6 +23,12 @@ from scipy.io import mmwrite
 from scDenorm.denorm import *
 ```
 
+    DEBUG:my_logger:This is a debug message
+    INFO:my_logger:This is an info message
+    WARNING:my_logger:This is a warning message
+    ERROR:my_logger:This is an error message
+    CRITICAL:my_logger:This is a critical message
+
 ``` python
 ad=sc.datasets.pbmc3k()
 ```
@@ -70,20 +76,23 @@ mmwrite('data/scaled.mtx', smtx[1:10,])
 scdenorm('data/pbmc3k_norm.h5ad',fout='data/pbmc3k_denorm.h5ad',verbose=1)
 ```
 
-    INFO:root:Reading input file: data/pbmc3k_norm.h5ad
-    INFO:root:The dimensions of this data are (2700, 32738).
-    INFO:root:select base
-    INFO:root:denormlizing ...
-    100%|██████████| 2700/2700 [00:00<00:00, 2900.90it/s]
-    INFO:root:Writing output file: data/pbmc3k_denorm.h5ad
+    INFO:my_logger:Reading input file: data/pbmc3k_norm.h5ad
+    /home/huang_yin/anaconda3/envs/sc/lib/python3.9/site-packages/anndata/__init__.py:51: FutureWarning: `anndata.read` is deprecated, use `anndata.read_h5ad` instead. `ad.read` will be removed in mid 2024.
+      warnings.warn(
+    INFO:my_logger:The dimensions of this data are (2700, 32738).
+    INFO:my_logger:Selecting base
+    INFO:my_logger:Denormlizing ...the base is 2.718281828459045
+
+    b is 2.718281828459045
+
+    100%|██████████| 2700/2700 [00:02<00:00, 1071.27it/s]
+    INFO:my_logger:Writing output file: data/pbmc3k_denorm.h5ad
 
 return a new anndata if there is no output path.
 
 ``` python
 new_ad=scdenorm('data/pbmc3k_norm.h5ad')
 ```
-
-    100%|██████████| 2700/2700 [00:00<00:00, 2969.22it/s]
 
 ``` python
 new_ad
@@ -124,7 +133,10 @@ scdenorm('data/scaled.mtx',fout='data/scd_scaled.h5ad')
 !scdenorm data/pbmc3k_norm.h5ad --fout data/pbmc3k_denorm.h5ad
 ```
 
-    100%|█████████████████████████████████████| 2700/2700 [00:00<00:00, 2719.59it/s]
+    /home/huang_yin/anaconda3/envs/sc/lib/python3.9/site-packages/anndata/__init__.py:51: FutureWarning: `anndata.read` is deprecated, use `anndata.read_h5ad` instead. `ad.read` will be removed in mid 2024.
+      warnings.warn(
+    b is 2.718281828459045
+    100%|█████████████████████████████████████| 2700/2700 [00:02<00:00, 1090.85it/s]
 
 #### Input sparse matrix with cell by gene
 
