@@ -99,6 +99,9 @@ def scdenorm(fin: str,  # The input file or AnnData
     arr = ad.X.data
     if np.array_equal(arr, np.round(arr)):
         logger.info(f"All counts are integers")
+    elif np.average(np.abs(arr-np.round(arr)))<cutoff:
+        logger.info(f"All counts are close to integers. Rounding them to intergers")
+        arr=np.round(arr)
     else:
         if gxc: #if data is gene by cell
             logger.info(f'The data is gene by cell. It is transposed to cell by gene {ad.T.shape}')
